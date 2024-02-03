@@ -9,8 +9,17 @@ const about = require("./about.json");
 // Create our app object
 const app = express();
 
-// set up middleware
-app.use(cors());
+
+
+app.use((req, res, next) => {
+  // Allow all origins for demonstration purposes. In production, specify only trusted origins.
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+  // Continue to the next middleware
+  next();
+});
 
 //home route for testing our app
 app.get("/", (req, res) => {
